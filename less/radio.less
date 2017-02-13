@@ -1,0 +1,211 @@
+@charset "UTF-8";
+
+@bgColor : #F5F6D4;
+@color : #85DB18;
+.bg(){
+  background-color: @color;
+}
+.margin(){
+  margin:50px auto;
+}
+body {
+  background-color: @bgColor;
+}
+/*音乐效果*/
+.spinner {
+  height: 60px;
+  text-align: center;
+  font-size: 10px;
+  .margin;
+  .rect {
+    .bg;
+    background-color: @color;
+    height: 30px;
+    width: 6px;
+    display: inline-block;
+    animation: stretchDelay 1.2s infinite ease-in-out;
+    .rectLoop(@counter) when (@counter < 7 ) {
+      &:nth-of-type(@{counter}) {
+        animation-delay: 0.6+@counter/10s;
+      }
+      .rectLoop(( @counter + 1 ));// 递归调用自身
+    }
+    .rectLoop(1);
+  }
+}
+
+ /*旋转方块*/
+.rotate-box {
+  width: 60px;
+  height: 60px;
+  .bg;
+  .margin;
+  animation: rotatePlane 1.2s infinite ease-in-out;
+}
+
+/*两个球缩放*/
+.double-scale {
+  .margin;
+  width: 60px;
+  height: 60px;
+  position: relative;
+  .scale1, .scale2 {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #67CF22;
+    opacity: 0.6;
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: bounce 2.0s infinite ease-in-out;
+  };
+  .scale2 {
+    animation-delay: -1.0s;
+  }
+}
+
+/*两个球缩放*/
+.scale-out {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  .margin;
+  .bg;
+  animation: scaleOut 1.0s infinite ease-in-out;
+
+}
+
+/*圆直线消失*/
+.scale-line {
+  .margin;
+  text-align: center;
+  .bounce {
+    width: 30px;
+    height: 30px;
+    .bg;
+    border-radius: 100%;
+    display: inline-block;
+    animation: bounceDelay 1.4s infinite ease-in-out;
+    animation-fill-mode: both;
+    .bounceLoop(@counter) when (@counter < 6 ) {
+      &:nth-of-type(@{counter}) {
+        animation-delay: @counter*0.16s;
+      }
+      .bounceLoop(( @counter + 1 ));// 递归调用自身
+    }
+    .bounceLoop(1);
+  }
+}
+
+/*俩方块旋转*/
+.cub-rotate {
+  .margin;
+  width: 32px;
+  height: 32px;
+  position: relative;
+  .cube1, .cube2 {
+    .bg;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: cubeMove 1.8s infinite ease-in-out;
+  };
+  .cube2 {
+    animation-delay: -0.9s;
+  }
+}
+
+/*多圆点中心旋转*/
+.dots-rotate {
+  .margin;
+  width: 90px;
+  height: 90px;
+  position: relative;
+  text-align: center;
+
+  animation: rotate 2.0s infinite linear;
+  .dot1, .dot2 {
+    width: 60%;
+    height: 60%;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    .bg;
+    border-radius: 100%;
+    animation: bounce 2.0s infinite ease-in-out;
+  }
+
+  .dot2 {
+    top: auto;
+    bottom: 0px;
+    animation-delay: -1.0s;
+  }
+}
+
+@keyframes stretchDelay {
+  0%, 40%, 100% {
+    transform: scaleY(1.0);
+  }  20% {
+       transform: scaleY(2.4);
+     }
+}
+@keyframes rotatePlane {
+  0% {
+    transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+  } 50% {
+      transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+    } 100% {
+        transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+      }
+}
+@keyframes bounce {
+  0%, 100% {
+    transform: scale(0.0);
+  } 50% {
+      transform: scale(1.0);
+    }
+}
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg); -webkit-transform: rotate(360deg)
+  }
+}
+@keyframes scaleOut {
+  0% {
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  } 100% {
+      transform: scale(1.0);
+      -webkit-transform: scale(1.0);
+      opacity: 0;
+    }
+}
+@keyframes bounceDelay {
+  0%, 80%, 100% {
+    transform: scale(0.0);
+  } 40% {
+      transform: scale(1.0);
+    }
+}
+@keyframes cubeMove {
+  25% {
+    transform: translateX(42px) rotate(-90deg) scale(0.5);
+  }
+  50% {
+    transform: translateX(42px) translateY(42px) rotate(-179deg);
+  }
+  50.1% {
+    transform: translateX(42px) translateY(42px) rotate(-180deg);
+  }
+  75% {
+    transform: translateX(0px) translateY(42px) rotate(-270deg) scale(0.5);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+

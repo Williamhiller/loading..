@@ -1,0 +1,12 @@
+{
+  "liu zhiyuan": "0元购活动页",
+  "version": "1.0.0",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-autoprefixer": "^3.0.4",
+    "grunt-contrib-csslint": "^1.0.0",
+    "grunt-contrib-less": "^1.4.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-csscomb": "^3.1.1"
+  }
+}
